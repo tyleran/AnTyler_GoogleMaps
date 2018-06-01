@@ -1,7 +1,11 @@
 package com.example.ant3384.mymapapp_p2;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -38,9 +42,42 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+        //Add a marker on the map that shows place of birth
+        //displays the message "born here"
+        LatLng GrandRapids = new LatLng(42.9634, -85.67);
+        mMap.addMarker(new MarkerOptions().position(GrandRapids).title("Born here"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(GrandRapids));
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != (PackageManager.PERMISSION_GRANTED)) {
+            Log.d("MyMapsApp", "Failed FINE Permission check");
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 2);
+
+        }
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != (PackageManager.PERMISSION_GRANTED)) {
+            Log.d("MyMapsApp", "Failed COARSE Permission check");
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 2);
+        }
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == (PackageManager.PERMISSION_GRANTED) || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == (PackageManager.PERMISSION_GRANTED)) {
+            mMap.setMyLocationEnabled(true);
+            {
+            }
+        }
+    }
+
+    public void changeView(){
+        int count = 0;
+        if(count== 0){
+            mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+            count++;
+
+        }
+        else if(count==1){
+            mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            count--;
+
+        }
+
     }
 }

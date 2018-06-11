@@ -39,14 +39,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:ems="8"
-            android:onClick="clearMarkers"
+            android:onClick="clear"
             android:text="Clear"></Button>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/holo_blue_bright"
+        android:background="@android:color/holo_blue_light"
         android:weightSum="1">
         <EditText
             android:id="@+id/editText_searchMap"

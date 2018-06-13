@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:ems="8"
-            android:onClick="clear"
+            android:onClick="clearMarkers"
             android:text="Clear"></Button>
     </LinearLayout>
 
